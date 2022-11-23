@@ -1,0 +1,346 @@
+/*Changing a bunch of margins, font sizes, and link colors.*/
+body {
+    font-size: 1.7vh;
+    font-family: Cambria, Georgia, serif;
+}
+p {
+    margin: 0;
+}
+h3 {
+    margin: 0;
+    font-size: 2vh;
+}
+a {
+    color:hsl(214, 71%, 25%);
+}
+a:visited {
+    color:hsl(214, 71%, 25%);
+}
+#hr {
+    width: clamp(30vh,30%,30vw);
+    margin: 0;
+}
+button {
+    font-family: Cambria, Georgia, serif;
+}
+h2 {
+    margin: 0;
+    font-family: Cambria, Georgia, serif;
+    font-size: 3vh;
+}
+/*Button popups*/
+.modals { /*Blurred background*/
+    display: none;
+    z-index: 2;
+    position: fixed;
+    overflow: auto;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: hsla(217, 0%, 64%, 0.4);
+}
+.modalContent { /*Actual modal*/
+    width: clamp(250px, 70%,500px);
+    animation: fadein .3s;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    transform: translate(-50%, -60%);
+    padding: 2vh;
+    position: absolute;
+    border-radius: 10px;
+}
+.examples { /*Example game tiles*/
+    display: inline-grid;
+    grid-template-columns: 4vh 4vh 4vh 4vh 4vh;
+    grid-template-rows: 4vh;
+    column-gap: clamp(2px, 2%,10px);
+    place-items: center stretch;
+    margin: 2% 0;
+}
+.modalLine { /*hr when in a modal*/
+    margin-top: 5%;
+    margin-bottom: 2.5%;
+    width: 100%;
+    border-top: 1px solid hsl(136, 0%, 50%);
+
+}
+/*Results*/
+.resultsPreview { /*All the boxes to display how it would be copy and pasted (apparently I was thinking of Nerdle and not Wordle when doing this)*/
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.resultsRows {
+    display: inline-grid;
+    grid-template-columns: 3vh 3vh 3vh 3vh 3vh; 
+    grid-template-rows: 3vh;
+    column-gap: clamp(2px, 1.5%,4px);
+    place-items: center stretch;
+    justify-content: center;
+    margin: .75% 0;
+}
+.longButton { /*Copy to clipboard + New game buttons. They're long bois*/
+    background-color: hsl(0, 0%, 20%);
+    width: 96%;
+    margin: 2% 2% 0 2%;
+    padding: 3% 0 3% 0;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 3px;
+    color: white;
+    border: 0;
+    font-size: 1.7vh;
+    cursor: pointer;
+}
+/*Settings*/
+.textSettings {
+    display: flex;
+    border: 0;
+    font-size: 2.3vh;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vh;
+}
+.switch { /*All for the slider*/
+    position: relative;
+    display: inline-block;
+    justify-self: right;
+    align-self: center;
+    width: 5.5vh;
+    height: 2.75vh;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0; /*display, none?*/
+}
+.slider {
+    border-radius: 3vh;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsl(136, 0%, 50%);
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    left: 0.3vh;
+    top: 0.25vh;
+    content: "";
+    background-color: white;
+    transition: .4s;
+    height: 2.25vh;
+    width: 2.25vh;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: hsl(116, 35%, 50%);
+}
+input:checked + .slider:before {
+    transform: translateX(2.65vh);
+}
+/*Stats*/
+.statsOverview { /*Container for # games played, etc.*/
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 80%;
+    margin: 3% 0 0 0;
+}
+.results { /*This and below are for the guess distribution graph*/
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 95%;
+}
+.resultsRow {
+    display: inline-grid;
+    grid-template-columns: 4% 80% 16%;
+    grid-template-rows: min(4.25vw,3.25vh);
+    grid-column-gap: min(1.5vw, 1.25vh);
+    justify-content: center;
+    align-content: center;
+    margin: .2vh;
+}
+.guesses {
+    text-align: right;
+    font-size: min(3vw, 2vh);
+    align-self: center;
+}
+.resultsBar {
+    justify-self: left;
+    text-align: right;
+    font-size: min(2.5vw, 1.5vh);
+    color: white;
+    grid-row: 1/2;
+    grid-column: 2/3;
+    border-radius: 3px;
+    background-color: hsl(136, 0%, 50%);
+    padding: min(.75vw,.5vh) min(1.25vw,1vh);
+    align-self: center;
+}
+.percent {
+    font-size: min(2.75vw, 1.75vh);
+    align-self: center;
+    justify-self: center;
+}
+/*Snackbars yum*/
+.snackbar {
+    visibility: hidden;
+    background-color: hsl(0, 0%, 20%);
+    color: white;
+    box-shadow: 2px 3px 2px hsl(136, 0%, 60%);
+    font-size: 1.7vh;
+    padding: 2vh;
+    position: fixed;
+    text-align: center;
+    margin-left: -8.4vh;
+    left: 50%;
+    z-index: 1;
+    border-radius: 3px;
+}
+.snackbar.show {
+    visibility: visible;
+    animation: fadein .3s, fadeout .3s 2.71s;
+}
+#s1 { /*These are all manually and inprecisely set because I couldn't get calc to do division properly*/
+    margin-left: -9.3vh;
+}
+#s2 {
+    margin-left: -10.9vh;
+}
+#s3 {
+    margin-left: -4.2vh;
+    z-index: 3;
+}
+#s4 {
+    margin-left: min(-11.5vh,-6.3vw);
+    z-index: 4;
+}
+@keyframes fadein { /*Short animation*/
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+/*Header stuff*/
+.header {
+    flex-shrink: 3;
+    margin: .5%;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-items: center;
+    width: clamp(30vh,30%,30vw);
+    column-gap: clamp(1px,1%,10px); /*clamps*/
+}
+.buttons {
+    width: clamp(3vh,5%,3vw);
+    height: 2vh;
+    font-size: 2vh;
+    padding: 0px;
+    background-color: white;
+    position: relative;
+    overflow: visible;
+    border-radius: 50%;
+    border: 0;
+}
+.buttons:active {
+    transform: translateY(.3vh);
+  }
+.dummyButton { /*In retrospect I should've assigned this buttons and added a class that hid this.*/
+    width: clamp(3vh,5%,3vw);
+    height: 2vh;
+    font-size: 2vh;
+    position: relative;
+    border-radius: 50%;
+    border: 0;
+    visibility: hidden;
+}
+.title {
+    font-size: 2.5vh; 
+    flex-grow: 2; 
+    display: flex;
+    justify-content: center;
+    align-content: end;
+    align-items: end;
+    margin: 0;
+
+}
+/*Game itself*/
+.game {
+    display: inline-grid;
+    grid-template-columns: 5vh 5vh 5vh 5vh 5vh;
+    grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
+    row-gap: clamp(2px, .6vh,10px);
+    column-gap: clamp(1px, 1%,10px);
+    place-items: center stretch;
+    justify-items: center;
+    margin: 2%;
+}
+.tile {
+    display: flex;
+    border: clamp(1.3px, .5vw, 2.5px) solid hsl(136, 0%, 70%);
+    border-radius: 10%;
+    height: 90%; /*clamps?*/
+    width: 90%;
+    font-family: Cambria, Georgia, serif;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+    font-weight: bold;
+
+}
+.filledTile {
+    animation: expand 0.1s ease;
+}
+@keyframes expand { /*the expanding and shrinking thing the Wordle does*/
+    0% {height: 90%; width: 90%;}
+    50% {height: 95%; width: 95%;}
+    100% {height: 90%; width: 90%;}
+}
+/*Keyboard*/
+.numbers {
+    border: 0;
+    background-color: hsl(136, 0%, 80%);
+    border-radius: 10%;
+    height: 5vh;
+    width: 3.3vh;
+    padding: 0;
+    margin: clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw) clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw);
+    font-size: 1.5vh;
+    cursor: pointer;
+    font-family: Cambria, Georgia, serif;
+    font-weight: bold;
+}
+.numbers:hover { /*This does not work in dark mode*/
+    background-color: hsl(136, 0%, 70%);
+}
+.txtButtons { /*Delete + Enter*/
+    border: 0;
+    background-color: hsl(136, 0%, 80%);
+    border-radius: 10%;
+    height: 5vh;
+    width: 6vh;
+    margin: clamp(.07vh, 5%, .1vw);
+    font-size: 1.5vh;
+    cursor: pointer;
+    font-family: Cambria, Georgia, serif;
+    font-weight: bold;
+}
+.txtButtons:hover {
+    background-color: hsl(136, 0%, 70%);
+}
+/*Setting dark mode basic properties*/
+.darkMode {
+    color: white;
+    background-color: hsl(240, 2%, 12%);
+}
