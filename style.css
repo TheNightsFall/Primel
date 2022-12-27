@@ -4,7 +4,7 @@ body {
     font-family: Cambria, Georgia, serif;
 }
 p {
-    margin: 0;
+    margin: 0.03vh 0 0.03vh 0;
 }
 h3 {
     margin: 0;
@@ -194,12 +194,11 @@ input:checked + .slider:before {
     visibility: hidden;
     background-color: hsl(0, 0%, 20%);
     color: white;
-    box-shadow: 2px 3px 2px hsl(136, 0%, 60%);
+    box-shadow: 0px 3px 2px hsl(136, 0%, 60%);
     font-size: 1.7vh;
     padding: 2vh;
     position: fixed;
     text-align: center;
-    margin-left: -8.4vh;
     left: 50%;
     z-index: 1;
     border-radius: 3px;
@@ -208,18 +207,10 @@ input:checked + .slider:before {
     visibility: visible;
     animation: fadein .3s, fadeout .3s 2.71s;
 }
-#s1 { /*These are all manually and inprecisely set because I couldn't get calc to do division properly*/
-    margin-left: -9.3vh;
-}
-#s2 {
-    margin-left: -10.9vh;
-}
 #s3 {
-    margin-left: -4.2vh;
     z-index: 3;
 }
 #s4 {
-    margin-left: min(-11.5vh,-6.3vw);
     z-index: 4;
 }
 @keyframes fadein { /*Short animation*/
@@ -280,15 +271,15 @@ input:checked + .slider:before {
     display: inline-grid;
     grid-template-columns: 5vh 5vh 5vh 5vh 5vh;
     grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
-    row-gap: clamp(2px, .6vh,10px);
-    column-gap: clamp(1px, 1%,10px);
+    row-gap: clamp(4px, .6vh,10px);
+    column-gap: clamp(4px, .45vh,10px);
     place-items: center stretch;
     justify-items: center;
     margin: 2%;
 }
 .tile {
     display: flex;
-    border: clamp(1.3px, .5vw, 2.5px) solid hsl(136, 0%, 70%);
+    border: clamp(1.3px, .5vw, 2px) solid hsl(136, 0%, 70%);
     border-radius: 10%;
     height: 90%; /*clamps?*/
     width: 90%;
@@ -311,7 +302,7 @@ input:checked + .slider:before {
 .numbers {
     border: 0;
     background-color: hsl(136, 0%, 80%);
-    border-radius: 10%;
+    border-radius: 3px;
     height: 5vh;
     width: 3.3vh;
     padding: 0;
@@ -327,9 +318,10 @@ input:checked + .slider:before {
 .txtButtons { /*Delete + Enter*/
     border: 0;
     background-color: hsl(136, 0%, 80%);
-    border-radius: 10%;
+    border-radius: 3px;
     height: 5vh;
-    width: 6vh;
+    width: 7vh;
+    text-align: center;
     margin: clamp(.07vh, 5%, .1vw);
     font-size: 1.5vh;
     cursor: pointer;
