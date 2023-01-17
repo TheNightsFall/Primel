@@ -17,16 +17,21 @@ a:visited {
     color:hsl(214, 71%, 25%);
 }
 #hr {
-    width: clamp(30vh,30%,30vw);
+    width: clamp(300px,30%,30vw);
     margin: 0;
 }
 button {
     font-family: Cambria, Georgia, serif;
 }
+h1 {
+    margin: 0;
+    font-family: Cambria, Georgia, serif;
+    font-size: clamp(18px,3.75vh,50px);
+}
 h2 {
     margin: 0;
     font-family: Cambria, Georgia, serif;
-    font-size: 3vh;
+    font-size: clamp(12px,3vh,45px);
 }
 /*Button popups*/
 .modals { /*Blurred background*/
@@ -194,12 +199,11 @@ input:checked + .slider:before {
     visibility: hidden;
     background-color: hsl(0, 0%, 20%);
     color: white;
-    box-shadow: 2px 3px 2px hsl(136, 0%, 60%);
+    box-shadow: 0px 3px 2px hsl(136, 0%, 60%);
     font-size: 1.7vh;
     padding: 2vh;
     position: fixed;
     text-align: center;
-    margin-left: -8.4vh;
     left: 50%;
     z-index: 1;
     border-radius: 3px;
@@ -208,18 +212,11 @@ input:checked + .slider:before {
     visibility: visible;
     animation: fadein .3s, fadeout .3s 2.71s;
 }
-#s1 { /*These are all manually and inprecisely set because I couldn't get calc to do division properly*/
-    margin-left: -9.3vh;
-}
-#s2 {
-    margin-left: -10.9vh;
-}
+
 #s3 {
-    margin-left: -4.2vh;
     z-index: 3;
 }
 #s4 {
-    margin-left: min(-11.5vh,-6.3vw);
     z-index: 4;
 }
 @keyframes fadein { /*Short animation*/
@@ -239,11 +236,11 @@ input:checked + .slider:before {
     flex-wrap: nowrap;
     align-items: center;
     justify-items: center;
-    width: clamp(30vh,30%,30vw);
+    width: clamp(300px,30%,30vw);
     column-gap: clamp(1px,1%,10px); /*clamps*/
 }
 .buttons {
-    width: clamp(3vh,5%,3vw);
+    width: clamp(4vh,7%,4vw);
     height: 2vh;
     font-size: 2vh;
     padding: 0px;
@@ -278,17 +275,17 @@ input:checked + .slider:before {
 /*Game itself*/
 .game {
     display: inline-grid;
-    grid-template-columns: 5vh 5vh 5vh 5vh 5vh;
-    grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
-    row-gap: clamp(2px, .6vh,10px);
-    column-gap: clamp(1px, 1%,10px);
+    grid-template-columns: 6vh 6vh 6vh 6vh 6vh;
+    grid-template-rows: 6vh 6vh 6vh 6vh 6vh 6vh;
+    row-gap: clamp(4px, .5vh, 10px);
+    column-gap: clamp(3.2px, .4vh, 8px);
     place-items: center stretch;
     justify-items: center;
-    margin: 2%;
+    margin: 2vh;
 }
 .tile {
     display: flex;
-    border: clamp(1.3px, .5vw, 2.5px) solid hsl(136, 0%, 70%);
+    border: 2px solid hsl(136, 0%, 70%);
     border-radius: 10%;
     height: 90%; /*clamps?*/
     width: 90%;
@@ -312,8 +309,8 @@ input:checked + .slider:before {
     border: 0;
     background-color: hsl(136, 0%, 80%);
     border-radius: 10%;
-    height: 5vh;
-    width: 3.3vh;
+    height: 6vh;
+    width: clamp(3.75vh,8%,4vh);
     padding: 0;
     margin: clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw) clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw);
     font-size: 1.5vh;
@@ -327,10 +324,11 @@ input:checked + .slider:before {
 .txtButtons { /*Delete + Enter*/
     border: 0;
     background-color: hsl(136, 0%, 80%);
-    border-radius: 10%;
+    border-radius: 7%;
     height: 5vh;
-    width: 6vh;
-    margin: clamp(.07vh, 5%, .1vw);
+    width: 7vh;
+    text-align: center;
+    margin: clamp(.2vh,1%,.1vw) clamp(.07vh, 5%, .1vw);
     font-size: 1.5vh;
     cursor: pointer;
     font-family: Cambria, Georgia, serif;

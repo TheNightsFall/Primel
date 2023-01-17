@@ -10,12 +10,12 @@
         <script src="script.js" type="module"></script>
         <title>Primel Remade</title>
     </head>
-    <body>
+    <body onresize="alignSnackbars()">
         <!--Pop-ups notifying user-->
         <div class="snackbar">Not enough digits.</div>
-        <div class="snackbar" id="s1">Not a prime number.</div>
-        <div class="snackbar" id="s2">Number already guessed.</div>
-        <div class="snackbar" id="s3"></div>
+        <div class="snackbar">Not a prime number.</div>
+        <div class="snackbar" >Number already guessed.</div>
+        <div class="snackbar" id="s3">00000</div>
         <div class="snackbar" id="s4">Results copied to clipboard.</div>
         <!--Info (from question mark) pop-up-->
         <div id="info" class="modals">
@@ -193,7 +193,7 @@
         <div class="header"> <!--The top three buttons, plus the word 'Primel.'-->
                 <button class="buttons" title="Info" onclick="showInfo()"><i class="fa fa-question"></i></button>
                 <button class="dummyButton"></button> <!--So the text would be properly centered on the page-->
-            <div class="title"><h2>Primel</h2></div> <!--h2 or h3 pick-->
+            <div class="title"><h1>Primel</h1></div>
             <button class="buttons" title="Stats" onclick="showStats()"><i class="fa fa-signal"></i></button>
             <button class="buttons" title="Settings" onclick="showSettings()"><i class="fa fa-gear"></i></button>
         </div>
@@ -241,6 +241,14 @@
             document.getElementsByClassName("modals")[3].style.display = "none";
         }
     }
+    function alignSnackbars() {
+    let snackbars = document.querySelectorAll(".snackbar");
+        snackbars.forEach(snackbar => {
+            let displacement = snackbar.offsetWidth/-2;
+            snackbar.style.marginLeft = String(displacement)+"px"; //fix
+        });
+    }
+    alignSnackbars();
     </script>
     </body>
 </html>
