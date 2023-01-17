@@ -4,9 +4,12 @@ A small project where I remake Primel.
 ## To-do List
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [x] Stats display when no games played
 - [x] Add some indication about how cookies are used
 =======
+=======
+>>>>>>> origin/main
 =======
 >>>>>>> origin/main
 - [ ] Stats display when no games played
