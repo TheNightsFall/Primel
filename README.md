@@ -2,19 +2,8 @@
 A small project where I remake Primel.
 
 ## To-do List
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 - [x] Stats display when no games played
 - [x] Add some indication about how cookies are used
-=======
-=======
->>>>>>> origin/main
-=======
->>>>>>> origin/main
-- [ ] Stats display when no games played
-- [ ] Add some indication about cookies and how they're being used
->>>>>>> origin/main
 - [ ] Figure out how to get the buttons to hover in dark mode
 - [ ] Add some more animations
 
