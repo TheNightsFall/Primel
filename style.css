@@ -4,7 +4,7 @@ body {
     font-family: Cambria, Georgia, serif;
 }
 p {
-    margin: 0.03vh 0 0.03vh 0;
+    margin: 0;
 }
 h3 {
     margin: 0;
@@ -17,16 +17,21 @@ a:visited {
     color:hsl(214, 71%, 25%);
 }
 #hr {
-    width: clamp(30vh,30%,30vw);
+    width: clamp(300px,30%,30vw);
     margin: 0;
 }
 button {
     font-family: Cambria, Georgia, serif;
 }
+h1 {
+    margin: 0;
+    font-family: Cambria, Georgia, serif;
+    font-size: clamp(18px,3.75vh,50px);
+}
 h2 {
     margin: 0;
     font-family: Cambria, Georgia, serif;
-    font-size: 3vh;
+    font-size: clamp(12px,3vh,45px);
 }
 /*Button popups*/
 .modals { /*Blurred background*/
@@ -207,6 +212,7 @@ input:checked + .slider:before {
     visibility: visible;
     animation: fadein .3s, fadeout .3s 2.71s;
 }
+
 #s3 {
     z-index: 3;
 }
@@ -230,11 +236,11 @@ input:checked + .slider:before {
     flex-wrap: nowrap;
     align-items: center;
     justify-items: center;
-    width: clamp(30vh,30%,30vw);
+    width: clamp(300px,30%,30vw);
     column-gap: clamp(1px,1%,10px); /*clamps*/
 }
 .buttons {
-    width: clamp(3vh,5%,3vw);
+    width: clamp(4vh,7%,4vw);
     height: 2vh;
     font-size: 2vh;
     padding: 0px;
@@ -269,17 +275,17 @@ input:checked + .slider:before {
 /*Game itself*/
 .game {
     display: inline-grid;
-    grid-template-columns: 5vh 5vh 5vh 5vh 5vh;
-    grid-template-rows: 5vh 5vh 5vh 5vh 5vh 5vh;
-    row-gap: clamp(4px, .6vh,10px);
-    column-gap: clamp(4px, .45vh,10px);
+    grid-template-columns: 6vh 6vh 6vh 6vh 6vh;
+    grid-template-rows: 6vh 6vh 6vh 6vh 6vh 6vh;
+    row-gap: clamp(4px, .5vh, 10px);
+    column-gap: clamp(3.2px, .4vh, 8px);
     place-items: center stretch;
     justify-items: center;
-    margin: 2%;
+    margin: 2vh;
 }
 .tile {
     display: flex;
-    border: clamp(1.3px, .5vw, 2px) solid hsl(136, 0%, 70%);
+    border: 2px solid hsl(136, 0%, 70%);
     border-radius: 10%;
     height: 90%; /*clamps?*/
     width: 90%;
@@ -302,9 +308,9 @@ input:checked + .slider:before {
 .numbers {
     border: 0;
     background-color: hsl(136, 0%, 80%);
-    border-radius: 3px;
-    height: 5vh;
-    width: 3.3vh;
+    border-radius: 10%;
+    height: 6vh;
+    width: clamp(3.75vh,8%,4vh);
     padding: 0;
     margin: clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw) clamp(.15vh, 5%, .15vw) clamp(.08vh, 3%, .08vw);
     font-size: 1.5vh;
@@ -318,11 +324,11 @@ input:checked + .slider:before {
 .txtButtons { /*Delete + Enter*/
     border: 0;
     background-color: hsl(136, 0%, 80%);
-    border-radius: 3px;
+    border-radius: 7%;
     height: 5vh;
     width: 7vh;
     text-align: center;
-    margin: clamp(.07vh, 5%, .1vw);
+    margin: clamp(.2vh,1%,.1vw) clamp(.07vh, 5%, .1vw);
     font-size: 1.5vh;
     cursor: pointer;
     font-family: Cambria, Georgia, serif;

@@ -11,8 +11,8 @@ var darkmode = 0;
 //list of background colors based on theme, 'light' is a bit misleading since it's just 'non high contrast'
 var bgColorsLight = ["rgb(140, 140, 140)", "rgb(89, 172, 83)", "rgb(217, 172, 38)"];
 var bgColorsHC = ["rgb(140, 140, 140)", "rgb(245, 119, 56)", "rgb(82, 158, 229)"];
-var emojiColorsLight = ["⬜", "🟩", "🟨"]; //Emoji boxes to copy and paste in regular mode...
-var emojiColorsHC = ["⬜", "🟧", "🟦"]; //And in high contrast mode.
+var emojiColorsLight = ["⬜", "🟩", "🟨"]; //Did I originally make these lists with the Discord emoji list instead of actual emojis? Um.
+var emojiColorsHC = ["⬜", "🟧", "🟦"];
 var bgColors = bgColorsLight;
 var emojiColors = emojiColorsLight;
 var stats = [] //edited by cookies
@@ -34,17 +34,9 @@ function loadTiles() { //Adds all the tiles to the game div, assigning position 
 function configStats() { //runs when page opens and once games are finished, basically gets data of how many guesses are used in games from cookie, slaps it into the stats page and results page.
   let statsInt = stats.map((x) => parseInt(x));
   let numPlayed = statsInt.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  let percentWon = String(Math.round(100 * (1 - statsInt[6] / numPlayed))) + "%";
+  let avgGuesses = String(Math.round((statsInt[0] * 1 + statsInt[1] * 2 + statsInt[2] * 3 + statsInt[3] * 4 + statsInt[4] * 5 + statsInt[5] * 6 + statsInt[6] * 7) / numPlayed * 100) / 100); //might change for balancing
   document.getElementById("numPlayed").textContent = String(numPlayed);
-  let percentWon;
-  let avgGuesses;
-  if (numPlayed != 0) {
-    percentWon = String(Math.round(100 * (1 - statsInt[6] / numPlayed))) + "%";
-    avgGuesses = String(Math.round((statsInt[0] * 1 + statsInt[1] * 2 + statsInt[2] * 3 + statsInt[3] * 4 + statsInt[4] * 5 + statsInt[5] * 6 + statsInt[6] * 7) / numPlayed * 100) / 100); //might change value of lost games for balancing, for now it's just assumed to be 7 turns.
-  } else {
-    percentWon = "0%";
-    avgGuesses = "0";
-    numPlayed = 1; //This won't go back into the cookie value. It lets all the percentages for distribution of turns be 0 instead of NaN since there's no divide by zero error, but doesn't affect anything else.
-  }
   document.getElementById("percentWon").textContent = percentWon;
   document.getElementById("avgGuesses").textContent = avgGuesses;
   for (let i = 0; i < 2; i++) {
@@ -59,6 +51,7 @@ function configStats() { //runs when page opens and once games are finished, bas
     }
   }
 }
+
 var darkMode = document.getElementById('darkMode'); //check for dark mode being toggled
 darkMode.addEventListener('change', function(event) {
   darkToggle(event.target);
@@ -399,9 +392,10 @@ function displayResults(wl) {
   setTimeout(() => { document.getElementById("results").style.display = "block" }, delay); //delay is 3s if you lost because the snackbar displaying the correct number is visible for 3s.
 }
 
+
 //COOKIE OM NOM
 function bakeCookie(name, value) { //name written with = at the end, makes/edits a cookie and resets its expiration time to 30 days.
-  document.cookie = name + value + ";" + "max-age=" + 30 * 24 * 60 * 60 + "; path=/";
+  document.cookie = `${name}${value}; path=/; max-age=` + 30 * 24 * 60 * 60;
 }
 
 function getCookie(name) { //name written with = at the end, retrieves a cookie
@@ -415,7 +409,6 @@ function getCookie(name) { //name written with = at the end, retrieves a cookie
       return c.substring(name.length, c.length);
     }
   }
-
   return "";
 }
 
@@ -448,7 +441,7 @@ function pageOpenCookies() { //gets display settings when opening the page, crea
   }
   stats = statistics.split('.'); //puts those numbers into a list so it actually makes sense and can be used for configStats.
 }
-document.getElementById("hr").style.borderTop = "hsl(240, 2%, 12%)"; //make the line really faint so that it fails any and all color contrast tests because I decided I liked it and couldn't get it to change in CSS.
+document.getElementById("hr").style.borderTop = "rgb(128,128,128)"; //make the line really faint so that it fails any and all color contrast tests because I decided I liked it and couldn't get it to change in CSS.
 //loadtiles and eat cookies
 loadTiles();
 pageOpenCookies();

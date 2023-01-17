@@ -1,290 +1,254 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--I despise writing comments, these were all written after finishing everything because I know I will be confused looking at this in the future, bear with me.-->
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--Import fonts, image, stylesheet, script-->
-  <script src="https://kit.fontawesome.com/6e28e56cdd.js" crossorigin="anonymous"></script>
-  <link rel="icon" href="Images/numbers.PNG" type="image/png">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" type="module"></script>
-  <title>Primel Remade</title>
-</head>
-
-<body onresize="alignSnackbars()">
-  <!--On resize since that changes offset of snackbars again-->
-  <!--Various pop-ups notifying user-->
-  <div class="snackbar">Not enough digits.</div>
-  <div class="snackbar">Not a prime number.</div>
-  <div class="snackbar">Number already guessed.</div>
-  <div class="snackbar" id="s3"></div>
-  <div class="snackbar" id="s4">Results copied to clipboard.</div>
-  <!--Info (from question mark icon) pop-up-->
-  <div id="info" class="modals">
-    <div class="modalContent">
-      <!--Instructions formatted and worded akin to Wordle.-->
-      <h2>How to Play</h2>
-      Guess the prime in six tries or less.
-      <ul>
-        <li>Each guess must be a five-digit prime number.</li>
-        <li>The color of the tiles will change to show how close your guess was to the prime.</li>
-      </ul>
-      <h3>Examples</h3>
-      <!--Examples of green, yellow, and gray tiles (or orange and blue respectively) within the instructions-->
-      <div class="examples">
-        <div class="tile filledTile"
-          style="background-color: rgb(89, 172, 83); border-color: rgb(89, 172, 83); color: white;">4</div>
-        <div class="tile">2</div>
-        <div class="tile">7</div>
-        <div class="tile">9</div>
-        <div class="tile">7</div>
-      </div>
-      <p><b>4</b> is in the prime and in the right spot.</p>
-      <div class="examples">
-        <div class="tile">8</div>
-        <div class="tile filledTile"
-          style="background-color: rgb(217, 172, 38); border-color: rgb(217, 172, 38); color: white;">1</div>
-        <div class="tile">2</div>
-        <div class="tile">3</div>
-        <div class="tile">9</div>
-      </div>
-      <p><b>1</b> is in the prime but in the wrong spot.</p>
-      <div class="examples">
-        <div class="tile">1</div>
-        <div class="tile">2</div>
-        <div class="tile">4</div>
-        <div class="tile filledTile"
-          style="background-color: rgb(122, 122, 122); border-color: rgb(122, 122, 122); color: white;">0</div>
-        <div class="tile">1</div>
-      </div>
-      <p><b>0</b> is not in the prime at any spot.</p>
-      <center>
-        <hr class="modalLine">
-      </center>
-      <!--Credits, in case user is not acquainted with this style of games...which would be impressive-->
-      <h2>Credits</h2>
-      A recreation of David Lawrence Miller's rendition of <a href="https://converged.yt/primel/" target="_blank"
-        class="link">Primel</a>, and heavily inspired by the original <a
-        href="https://www.nytimes.com/games/wordle/index.html" target="_blank" class="link">Wordle</a>. Think of this as
-      a practice Primel. High contrast colors taken from <a href="https://wafflegame.net/" target="_blank"
-        class="link">Waffle</a>.<br><br>
-      Thanks to Grace for picking the font (Cambria).
-    </div>
-  </div>
-  <!--Pop-up once user finishes a game-->
-  <div id="results" class="modals">
-    <div class="modalContent">
-      <center>
-        <h2 id="wl"></h2>
-      </center><br>
-      <!--Text with whether user won or lost, is inputted later based on win condition-->
-      <div class="resultsPreview"></div>
-      <!--Buttons for copying results to clipboard and reloading the page to start a new game.-->
-      <button class="longButton" id="copyClipboard">Copy to Clipboard</button>
-      <button class="longButton" onclick="newGame()">New Game</button>
-      <center>
-        <hr class="modalLine">
-        <!--Statistics-->
-        <h2>Guess Distribution</h2><br>
-        <div class="results">
-          <div class="resultsRow">
-            <!--Each guess number (1-6 + X [loss]) has its own row, with the guess number, # times received, and %.-->
-            <div class="guesses">1</div>
-            <div class="resultsBar num1"></div>
-            <div class="percent num1"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">2</div>
-            <div class="resultsBar num2"></div>
-            <div class="percent num2"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">3</div>
-            <div class="resultsBar num3"></div>
-            <div class="percent num3"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">4</div>
-            <div class="resultsBar num4"></div>
-            <div class="percent num4"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">5</div>
-            <div class="resultsBar num5"></div>
-            <div class="percent num5"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">6</div>
-            <div class="resultsBar num6"></div>
-            <div class="percent num6"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">X</div>
-            <div class="resultsBar num7"></div>
-            <div class="percent num7"></div>
-          </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import fonts, image, stylesheet, script because I *will* delete it on accident at some point otherwise-->
+        <script src="https://kit.fontawesome.com/6e28e56cdd.js" crossorigin="anonymous"></script>
+        <link rel = "icon" href = "Images/numbers.PNG" type = "image/png">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" type="module"></script>
+        <title>Primel Remade</title>
+    </head>
+    <body onresize="alignSnackbars()">
+        <!--Pop-ups notifying user-->
+        <div class="snackbar">Not enough digits.</div>
+        <div class="snackbar">Not a prime number.</div>
+        <div class="snackbar" >Number already guessed.</div>
+        <div class="snackbar" id="s3">00000</div>
+        <div class="snackbar" id="s4">Results copied to clipboard.</div>
+        <!--Info (from question mark) pop-up-->
+        <div id="info" class="modals">
+            <div class="modalContent">
+            <!--Instructions pretty much the same as on Wordle-->
+            <h2>How to Play</h2>
+            Guess the prime in six tries or less.
+            <ul>
+                <li>Each guess must be a five-digit prime number.</li>
+                <li>The color of the tiles will change to show how close your guess was to the prime.</li>
+            </ul>
+            <h3>Examples</h3>
+            <!--Examples of green, yellow, and gray tiles (or orange and blue respectively)-->
+            <div class="examples">
+                <div class="tile filledTile" style="background-color: rgb(89, 172, 83); border-color: rgb(89, 172, 83); color: white;">4</div>
+                <div class="tile">2</div>
+                <div class="tile">7</div>
+                <div class="tile">9</div>
+                <div class="tile">7</div>
+            </div>
+            <p><b>4</b> is in the prime and in the right spot.</p>
+            <div class="examples">
+                <div class="tile">8</div>
+                <div class="tile filledTile" style="background-color: rgb(217, 172, 38); border-color: rgb(217, 172, 38); color: white;">1</div>
+                <div class="tile">2</div>
+                <div class="tile">3</div>
+                <div class="tile">9</div>
+            </div>
+            <p><b>1</b> is in the prime but in the wrong spot.</p>
+            <div class="examples">
+                <div class="tile">1</div>
+                <div class="tile">2</div>
+                <div class="tile">4</div>
+                <div class="tile filledTile" style="background-color: rgb(122, 122, 122); border-color: rgb(122, 122, 122); color: white;">0</div>
+                <div class="tile">1</div>
+            </div>
+            <p><b>0</b> is not in the prime at any spot.</p>
+            <center><hr class="modalLine"></center>
+            <!--Credits, in case user is not acquainted with this style of games...which would be impressive-->
+            <h2>Credits</h2>
+            A recreation of David Lawrence Miller's rendition of <a href="https://converged.yt/primel/" target="_blank" class="link">Primel</a>, and heavily inspired by the original <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank" class="link">Wordle</a>. Think of this as a practice Primel. High contrast colors taken from <a href="https://wafflegame.net/" target="_blank" class="link">Waffle</a>.<br><br>
+            Thanks to Grace for picking the font.
         </div>
-      </center>
-    </div>
-  </div>
-  <!--Settings, which toggles dark mode and high contrast mode.-->
-  <div id="settings" class="modals">
-    <div class="modalContent">
-      <center>
-        <h2>Settings</h2>
-        <div class="textSettings">Dark mode
-          <!--Labels are sliders and they go back and forth. Colored green/orange when active.-->
-          <label class="switch"><input type="checkbox" id="darkMode"><span class="slider"></span></label>
         </div>
-        <div class="textSettings">High contrast
-          <label class="switch"><input type="checkbox" id="highContrast"><span class="slider"></span></label>
+        <!--Pop-up once user finishes a game-->
+        <div id="results" class="modals">
+            <div class="modalContent">
+                <center><h2 id="wl"></h2></center><br> <!--Text with whether user won or lost-->
+                <div class="resultsPreview"></div>
+                <!--Buttons, maybe try to figure out how games like Nerdle auto-select one.-->
+                <button class="longButton" id="copyClipboard">Copy to Clipboard</button>
+                <button class="longButton" onclick="newGame()">New Game</button>
+                <center><hr class="modalLine">
+                <!--Statistics-->
+                    <h2>Guess Distribution</h2><br>
+                    <div class="results">
+                        <div class="resultsRow">
+                            <!--Each guess number (1-6 + X) has its own row, with the guess number, # times received, and %.-->
+                            <div class="guesses">1</div>
+                            <div class="resultsBar num1"></div>
+                            <div class="percent num1"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">2</div>
+                            <div class="resultsBar num2"></div>
+                            <div class="percent num2"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">3</div>
+                            <div class="resultsBar num3"></div>
+                            <div class="percent num3"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">4</div>
+                            <div class="resultsBar num4"></div>
+                            <div class="percent num4"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">5</div>
+                            <div class="resultsBar num5"></div>
+                            <div class="percent num5"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">6</div>
+                            <div class="resultsBar num6"></div>
+                            <div class="percent num6"></div>
+                        </div>
+                        <div class="resultsRow">
+                            <div class="guesses">X</div>
+                            <div class="resultsBar num7"></div>
+                            <div class="percent num7"></div>
+                        </div>
+                    </div></center>      
+            </div>
         </div>
-        <hr class="modalLine">
-        <h2>About Cookies</h2>
-
-        <p>This site uses two cookies. One tracks whether dark/high contrast mode is on or not.
-          The other stores number of games played and guess distribution — everything seen
-          on the Statistics page.</p>
-        <p><b>None of
-            this information is shared.</b></p>
-      </center>
-    </div>
-  </div>
-  <!--Statistics, a reduced version of the type that is available on Wordle because I don't think streaks matter when the game can be played infinitely.-->
-  <div id="stats" class="modals">
-    <div class="modalContent">
-      <center>
-        <h2>Statistics</h2>
-        <div class="statsOverview">
-          <!--Number of games played-->
-          <div class="statBox">
-            <h3 id="numPlayed"></h3>
-            Played
-          </div>
-          <!--Percentage of games won-->
-          <div class="statBox">
-            <h3 id="percentWon"></h3>
-            Win Rate
-          </div>
-          <!--Average number of guesses used per game (Failed games count as 7)-->
-          <div class="statBox">
-            <h3 id="avgGuesses"></h3>
-            Guesses
-          </div>
+        <!--Settings, which is literally just dark mode and high contrast mode.-->
+        <div id="settings" class="modals">
+            <div class="modalContent">
+                <center><h2>Settings</h2>
+                    <div class="textSettings">Dark mode 
+                        <!--Labels are sliders and they go back and forth and it's fun to click them-->
+                        <label class="switch"><input type="checkbox" id="darkMode"><span class="slider"></span></label>
+                    </div>
+                    <div class="textSettings">High contrast
+                        <label class="switch"><input type="checkbox" id="highContrast"><span class="slider"></span></label>
+                    </div>
+                </center>
+            </div>
         </div>
-        <hr class="modalLine">
-        <!--The same distribution of guesses graph as on the results screen-->
-        <h2>Guess Distribution</h2><br>
-        <div class="results">
-          <div class="resultsRow">
-            <div class="guesses">1</div>
-            <div class="resultsBar num1"></div>
-            <div class="percent num1"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">2</div>
-            <div class="resultsBar num2"></div>
-            <div class="percent num2"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">3</div>
-            <div class="resultsBar num3"></div>
-            <div class="percent num3"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">4</div>
-            <div class="resultsBar num4"></div>
-            <div class="percent num4"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">5</div>
-            <div class="resultsBar num5"></div>
-            <div class="percent num5"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">6</div>
-            <div class="resultsBar num6"></div>
-            <div class="percent num6"></div>
-          </div>
-          <div class="resultsRow">
-            <div class="guesses">X</div>
-            <div class="resultsBar num7"></div>
-            <div class="percent num7"></div>
-          </div>
+        <!--Statistics, a reduced version of the type that is available on Wordle because I do not understand the concept of streaks or why they matter.-->
+        <div id="stats" class="modals">
+            <div class="modalContent">
+                <center><h2>Statistics</h2>
+                    <div class="statsOverview">
+                        <!--Number of games played-->
+                        <div class="statBox">
+                            <h3 id="numPlayed"></h3>
+                            Played
+                        </div>
+                        <!--Percentage of games won-->
+                        <div class="statBox">
+                            <h3 id="percentWon"></h3>
+                            Win Rate
+                        </div>
+                        <!--Average number of guesses used per game (Failed games count as 7)-->
+                        <div class="statBox">
+                            <h3 id="avgGuesses"></h3>
+                            Guesses
+                        </div>
+                        </div>
+                        <hr class="modalLine">
+                        <!--The same distribution of guesses graph as on the results screen-->
+                        <h2>Guess Distribution</h2><br>
+                        <div class="results">
+                            <div class="resultsRow">
+                                <div class="guesses">1</div>
+                                <div class="resultsBar num1"></div>
+                                <div class="percent num1"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">2</div>
+                                <div class="resultsBar num2"></div>
+                                <div class="percent num2"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">3</div>
+                                <div class="resultsBar num3"></div>
+                                <div class="percent num3"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">4</div>
+                                <div class="resultsBar num4"></div>
+                                <div class="percent num4"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">5</div>
+                                <div class="resultsBar num5"></div>
+                                <div class="percent num5"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">6</div>
+                                <div class="resultsBar num6"></div>
+                                <div class="percent num6"></div>
+                            </div>
+                            <div class="resultsRow">
+                                <div class="guesses">X</div>
+                                <div class="resultsBar num7"></div>
+                                <div class="percent num7"></div>
+                            </div>
+                        </div>
+                </center>
+            </div>
         </div>
-      </center>
-    </div>
-  </div>
-  <center>
-    <div class="header">
-      <!--The top three buttons in the header, plus the word 'Primel.'-->
-      <button class="buttons" title="Info" onclick="showInfo()"><i class="fa fa-question"></i></button>
-      <button class="dummyButton"></button>
-      <!--So the text would be properly centered on the page-->
-      <div class="title">
-        <h2>Primel</h2>
-      </div>
-      <button class="buttons" title="Stats" onclick="showStats()"><i class="fa fa-signal"></i></button>
-      <button class="buttons" title="Settings" onclick="showSettings()"><i class="fa fa-gear"></i></button>
-    </div>
-    <hr id="hr">
-    <!--Another line!-->
-    <div class="game"></div>
-    <!--the 6x5 game grid gets added here-->
-    <div class="row">
-      <!-- Row of number keys-->
-      <button class="numbers">1</button>
-      <button class="numbers">2</button>
-      <button class="numbers">3</button>
-      <button class="numbers">4</button>
-      <button class="numbers">5</button>
-      <button class="numbers">6</button>
-      <button class="numbers">7</button>
-      <button class="numbers">8</button>
-      <button class="numbers">9</button>
-      <button class="numbers">0</button>
-    </div>
-    <div class="row">
-      <!--Delete and Enter, didn't know what order to put them in so I just did it alphabetically.-->
-      <button class="txtButtons">Delete</button>
-      <button class="txtButtons">Enter</button>
-    </div>
-  </center>
-  <script>
+        <center> <!--Centering things probably took half of the time in this project, so for most things I just gave up and chucked the center tag on it.-->
+        <div class="header"> <!--The top three buttons, plus the word 'Primel.'-->
+                <button class="buttons" title="Info" onclick="showInfo()"><i class="fa fa-question"></i></button>
+                <button class="dummyButton"></button> <!--So the text would be properly centered on the page-->
+            <div class="title"><h1>Primel</h1></div>
+            <button class="buttons" title="Stats" onclick="showStats()"><i class="fa fa-signal"></i></button>
+            <button class="buttons" title="Settings" onclick="showSettings()"><i class="fa fa-gear"></i></button>
+        </div>
+        <hr id="hr"> <!--Another line!-->
+        <div class="game"></div> <!--the 6x5 layout gets added here-->
+        <div class="row"> <!-- Row of number keys-->
+            <button class="numbers">1</button>
+            <button class="numbers">2</button>
+            <button class="numbers">3</button>
+            <button class="numbers">4</button>
+            <button class="numbers">5</button>
+            <button class="numbers">6</button>
+            <button class="numbers">7</button>
+            <button class="numbers">8</button>
+            <button class="numbers">9</button>
+            <button class="numbers">0</button>
+        </div>
+        <div class="row"> <!--Delete and Enter, didn't know what order to put them in so just did it alphabetically, then realized Primel probably does it the other way because I was instinctively doing it so.-->
+            <button class="txtButtons">Delete</button>
+            <button class="txtButtons">Enter</button>
+        </div>
+        </center>
+    <script>
     //All the button openings
     function showInfo() { //Information
-      document.getElementById("info").style.display = "block";
+        document.getElementById("info").style.display= "block";
     }
     function showSettings() { //Settings
-      document.getElementById("settings").style.display = "block";
+        document.getElementById("settings").style.display= "block";
     }
     function showStats() { //Statistics
-      document.getElementById("stats").style.display = "block";
+        document.getElementById("stats").style.display = "block";
     }
     function newGame() { //Reload page
-      window.location.reload();
+            window.location.reload();
     }
-    window.onclick = function (event) { //...and all the button closings
-      if (event.target == document.getElementsByClassName("modals")[0]) {
-        document.getElementsByClassName("modals")[0].style.display = "none";
-      } else if (event.target == document.getElementsByClassName("modals")[1]) {
-        document.getElementsByClassName("modals")[1].style.display = "none";
-      } else if (event.target == document.getElementsByClassName("modals")[2]) {
-        document.getElementsByClassName("modals")[2].style.display = "none";
-      } else if (event.target == document.getElementsByClassName("modals")[3]) {
-        document.getElementsByClassName("modals")[3].style.display = "none";
-      }
+    window.onclick = function(event) { //...and all the button closings
+        if (event.target == document.getElementsByClassName("modals")[0]) {
+            document.getElementsByClassName("modals")[0].style.display = "none";
+        } else if (event.target == document.getElementsByClassName("modals")[1]) {
+            document.getElementsByClassName("modals")[1].style.display = "none";
+        } else if (event.target == document.getElementsByClassName("modals")[2]) {
+            document.getElementsByClassName("modals")[2].style.display = "none";
+        } else if (event.target == document.getElementsByClassName("modals")[3]) {
+            document.getElementsByClassName("modals")[3].style.display = "none";
+        }
     }
-    function alignSnackbars() { //Center aligning snackbars, because doing so in CSS makes it centered based on the very left of each snackbar. So it gets the width of each one (all different widths due to different number of characters), divides by two, then offsets so it's truly centered.
-      let snackbars = document.querySelectorAll(".snackbar");
-      snackbars.forEach(snackbar => {
-        let displacement = snackbar.offsetWidth / -2;
-        snackbar.style.marginLeft = String(displacement) + "px";
-      });
+    function alignSnackbars() {
+    let snackbars = document.querySelectorAll(".snackbar");
+        snackbars.forEach(snackbar => {
+            let displacement = snackbar.offsetWidth/-2;
+            snackbar.style.marginLeft = String(displacement)+"px"; //fix
+        });
     }
     alignSnackbars();
-  </script>
-</body>
-
+    </script>
+    </body>
 </html>
